@@ -12,8 +12,8 @@ const Dashboard = ({ authedUser, questions }) => {
       questions
         .filter(
           (question) =>
-            question.optionOne.votes.includes(authedUser.id) ||
-            question.optionTwo.votes.includes(authedUser.id)
+            question.optionOne.votes.includes(authedUser) ||
+            question.optionTwo.votes.includes(authedUser)
         )
         .sort((a, b) => b.timestamp - a.timestamp)
     );
@@ -22,8 +22,8 @@ const Dashboard = ({ authedUser, questions }) => {
       questions
         .filter(
           (question) =>
-            !question.optionOne.votes.includes(authedUser.id) &&
-            !question.optionTwo.votes.includes(authedUser.id)
+            !question.optionOne.votes.includes(authedUser) &&
+            !question.optionTwo.votes.includes(authedUser)
         )
         .sort((a, b) => b.timestamp - a.timestamp)
     );

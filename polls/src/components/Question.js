@@ -5,11 +5,10 @@ import Error from "./Error";
 
 const Question = (props) => {
   const navigate = useNavigate();
-  console.log(props);
 
   const toDetail = (e, id) => {
     e.preventDefault();
-    navigate(`/questions/:questions_${id}`);
+    navigate(`/questions/:question_${id}`);
   };
 
   if (!props.question === null) {
@@ -20,7 +19,7 @@ const Question = (props) => {
     props.question;
 
   return (
-    <Link to={`/questions/:question_${id}`}>
+    <Link to={`/questions/${id}`}>
       <div className='question'>
         <img src={avatar} alt={`Avatar of ${name}`} className='avatar' />
         <div className='question-info'>
@@ -40,12 +39,10 @@ const Question = (props) => {
 
 const mapStateToProps = ({ authedUser, users, questions }, { id }) => {
   const question = questions[id];
-
   return {
     authedUser,
-    question: question
-      ? formatQuestion(question, users[question.author], authedUser)
-      : null,
+    users,
+    question: question && formatQuestion(question, users[question.author]),
   };
 };
 
