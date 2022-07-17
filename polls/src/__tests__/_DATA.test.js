@@ -1,6 +1,8 @@
-import { _saveQuestion } from "./_DATA";
-import { formatQuestion } from "./_DATA";
-import { _saveQuestionAnswer } from "./_DATA";
+import { _saveQuestion } from "../utils/_DATA";
+import { formatQuestion } from "../utils/_DATA";
+import { _saveQuestionAnswer } from "../utils/_DATA";
+
+jest.setTimeout(30000);
 
 describe("_saveQuestion", () => {
   it("should save a question", async () => {
@@ -27,15 +29,18 @@ describe("_saveQuestion", () => {
   });
 });
 
+// Got an idea for implementation for this test from a github repo:
+//  https://github.com/kluth/would-you-rather/blob/main/src/_DATA.test.js
 describe("_saveQuestionAnswer", () => {
-  it("should save a question answer", async () => {
-    const answer = {
-      authedUser: "authedUser",
-      qid: "qid",
-      answer: "OptionOne",
-    };
-    const result = await _saveQuestionAnswer(answer);
-    expect(result).toBeTruthy();
+  it("should return true when correct", async () => {
+    const answer = _saveQuestionAnswer({
+      authedUser: "tylermcginnis",
+      qid: "vthrdm985a262al8qx3do",
+      answer: "optionTwo",
+    });
+
+    expect(answer).toBeInstanceOf(Promise);
+    await expect(answer).resolves.toEqual(true);
   });
 
   it("should throw an error if one of the required fields is missing", async () => {

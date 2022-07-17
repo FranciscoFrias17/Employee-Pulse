@@ -3,7 +3,6 @@ import { connect, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { handleSaveQuestionAnswer } from "../actions/questions";
 import { formatDate } from "../utils/helpers";
-
 import Nav from "./Nav";
 
 function QuestionDetail({ questions, authedUser, users }) {
@@ -11,65 +10,53 @@ function QuestionDetail({ questions, authedUser, users }) {
   const { question_id } = useParams();
   let question = questions.find((question) => question.id === question_id);
   let author = users[question.author];
-  let optionOne = question.optionOne;
-  let optionTwo = question.optionTwo;
   let timestamp = question.timestamp;
 
-  console.log(question);
+  console.log("QuestionDetail: ", question, question_id, author);
 
   const [selectOption, setSelectOption] = useState({
-    optionOne: "none",
-    optionTwo: "none",
+    optionOne: "",
+    optionTwo: "",
   });
 
   useEffect(() => {
-    if (question.optionOne.votes.includes(authedUser)) {
+    if (question) {
       setSelectOption({
-        optionOne: "selected",
-      });
-    }
-    if (question.optionTwo.votes.includes(authedUser)) {
-      setSelectOption({
-        optionTwo: "selected",
+        optionOne: question.optionOne.votes.includes(authedUser)
+          ? "selected"
+          : "",
+        optionTwo: question.optionTwo.votes.includes(authedUser)
+          ? "selected"
+          : "",
       });
     }
   }, [question, authedUser]);
 
-  const selectedOne = {
-    authedUser: authedUser,
-    qid: question_id,
-    answer: "optionOne",
-  };
-
-  const selectedTwo = {
-    authedUser: authedUser,
-    qid: question_id,
-    answer: "optionTwo",
-  };
-
   const optionOneStats = () => {
     return (
-      (optionOne.votes.length /
-        (optionOne.votes.length + optionTwo.votes.length)) *
+      (question.optionOne.votes.length /
+        (question.optionOne.votes.length + question.optionTwo.votes.length)) *
       100
     ).toFixed(2);
   };
 
   const optionTwoStats = () => {
     return (
-      (optionTwo.votes.length /
-        (optionOne.votes.length + optionTwo.votes.length)) *
+      (question.optionTwo.votes.length /
+        (question.optionOne.votes.length + question.optionTwo.votes.length)) *
       100
     ).toFixed(2);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectOption.optionOne === "selected") {
-      dispatch(handleSaveQuestionAnswer(selectedOne));
-    } else if (selectOption.optionTwo === "selected") {
-      dispatch(handleSaveQuestionAnswer(selectedTwo));
-    }
+    dispatch(
+      handleSaveQuestionAnswer({
+        authedUser: authedUser,
+        qid: question_id,
+        answer: selectOption,
+      })
+    );
   };
 
   return (
@@ -83,7 +70,7 @@ function QuestionDetail({ questions, authedUser, users }) {
           <h4>{author.name}</h4>
           <h5>Asked at: {formatDate(timestamp)}</h5>
         </div>
-        <form onChange={handleSubmit}>
+        <form>
           <div className='form-group'>
             <label>Would you rather:</label>
             <div className='form-check'>
@@ -92,9 +79,9 @@ function QuestionDetail({ questions, authedUser, users }) {
                 name='option'
                 value='optionOne'
                 checked={selectOption.optionOne === "selected"}
-                onChange={() => setSelectOption({ optionOne: "selected" })}
+                onChange={(e) => setSelectOption({ optionOne: "selected" })}
               />
-              <label>{optionOne.text}</label>
+              <label>{question.optionOne.text}</label>
             </div>
             <div>
               <input
@@ -102,13 +89,29 @@ function QuestionDetail({ questions, authedUser, users }) {
                 name='option'
                 value='optionTwo'
                 checked={selectOption.optionTwo === "selected"}
-                onChange={() => setSelectOption({ optionTwo: "selected" })}
+                onChange={(e) => setSelectOption({ optionTwo: "selected" })}
               />
-              <label>{optionTwo.text}</label>
+              <label>{question.optionTwo.text}</label>
             </div>
-            <button className='btn' type='submit'>
+            <button className='btn' type='submit' onClick={handleSubmit}>
               Submit
             </button>
+            {selectOption.optionOne === "selected" && (
+              <div>
+                <h5>
+                  {optionOneStats()}% of employees selected to{" "}
+                  {question.optionOne.text}
+                </h5>
+              </div>
+            )}
+            {selectOption.optionTwo === "selected" && (
+              <div>
+                <h5>
+                  {optionTwoStats()}% of employees selected to{" "}
+                  {question.optionTwo.text}
+                </h5>
+              </div>
+            )}
           </div>
         </form>
       </div>

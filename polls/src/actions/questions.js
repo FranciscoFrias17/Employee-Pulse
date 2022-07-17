@@ -29,7 +29,7 @@ export function handleAddQuestion(question) {
   };
 }
 
-export function receiveQuestionAnswer(authedUser, qid, answer) {
+export function savePollAnswer(authedUser, qid, answer) {
   return {
     type: SAVE_QUESTION_ANSWER,
     authedUser,
@@ -42,7 +42,7 @@ export function handleSaveQuestionAnswer(authedUser, qid, answer) {
   return (dispatch) => {
     dispatch(showLoading());
     return saveQuestionAnswer(authedUser, qid, answer).then((question) => {
-      dispatch(receiveQuestionAnswer(authedUser, qid, answer));
+      dispatch(savePollAnswer(authedUser, qid, answer));
       dispatch(hideLoading());
     });
   };
