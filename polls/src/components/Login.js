@@ -10,6 +10,8 @@ const Login = ({ users, dispatch }) => {
     dispatch(setAuthedUser(selectUser));
   };
 
+  const disabled = selectUser === "none";
+
   return (
     <form className='Login-Form'>
       <h2 className='Login__title'>Select User:</h2>
@@ -27,7 +29,11 @@ const Login = ({ users, dispatch }) => {
         );
       })}
 
-      <button className='Login__button' onClick={handleLogin}>
+      <button
+        className='Login__button'
+        onClick={handleLogin}
+        disabled={disabled}
+      >
         Login
       </button>
     </form>

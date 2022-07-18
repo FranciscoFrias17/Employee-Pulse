@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { handleSaveQuestionAnswer } from "../actions/questions";
@@ -12,25 +12,12 @@ function QuestionDetail({ questions, authedUser, users }) {
   let author = users[question.author];
   let timestamp = question.timestamp;
 
-  console.log("QuestionDetail: ", question, question_id, author);
-
   const [selectOption, setSelectOption] = useState({
     optionOne: "",
     optionTwo: "",
   });
 
-  useEffect(() => {
-    if (question) {
-      setSelectOption({
-        optionOne: question.optionOne.votes.includes(authedUser)
-          ? "selected"
-          : "",
-        optionTwo: question.optionTwo.votes.includes(authedUser)
-          ? "selected"
-          : "",
-      });
-    }
-  }, [question, authedUser]);
+  console.log(question.optionOne.votes.includes(authedUser));
 
   const optionOneStats = () => {
     return (
@@ -48,17 +35,19 @@ function QuestionDetail({ questions, authedUser, users }) {
     ).toFixed(2);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(
-      handleSaveQuestionAnswer({
-        authedUser: authedUser,
-        qid: question_id,
-        answer: selectOption,
-      })
-    );
+  const selectedOption = {
+    authedUser: authedUser,
+    qid: question_id,
+    answer: selectOption.optionOne === "selected" ? "optionOne" : "optionTwo",
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(handleSaveQuestionAnswer(selectedOption));
+  };
+
+  const disabled =
+    selectOption.optionOne === "" || selectOption.optionTwo === "";
   return (
     <div>
       <div>
@@ -70,7 +59,7 @@ function QuestionDetail({ questions, authedUser, users }) {
           <h4>{author.name}</h4>
           <h5>Asked at: {formatDate(timestamp)}</h5>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <label>Would you rather:</label>
             <div className='form-check'>
@@ -93,7 +82,7 @@ function QuestionDetail({ questions, authedUser, users }) {
               />
               <label>{question.optionTwo.text}</label>
             </div>
-            <button className='btn' type='submit' onClick={handleSubmit}>
+            <button className='btn' type='submit' disabled={disabled}>
               Submit
             </button>
             {selectOption.optionOne === "selected" && (

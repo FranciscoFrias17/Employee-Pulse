@@ -29,7 +29,7 @@ export function handleAddQuestion(question) {
   };
 }
 
-export function savePollAnswer(authedUser, qid, answer) {
+export function savePollAnswer({ authedUser, qid, answer }) {
   return {
     type: SAVE_QUESTION_ANSWER,
     authedUser,
@@ -38,12 +38,14 @@ export function savePollAnswer(authedUser, qid, answer) {
   };
 }
 
-export function handleSaveQuestionAnswer(authedUser, qid, answer) {
-  return (dispatch) => {
-    dispatch(showLoading());
-    return saveQuestionAnswer(authedUser, qid, answer).then((question) => {
-      dispatch(savePollAnswer(authedUser, qid, answer));
-      dispatch(hideLoading());
+export function handleSaveQuestionAnswer(info) {
+  return async (dispatch) => {
+    dispatch(savePollAnswer(info));
+
+    return await saveQuestionAnswer(info).catch((e) => {
+      console.warn("Error in handleSaveQuestionAnswer: ", e);
+      dispatch(savePollAnswer(info));
+      alert("Error: Could not save poll answer.");
     });
   };
 }
