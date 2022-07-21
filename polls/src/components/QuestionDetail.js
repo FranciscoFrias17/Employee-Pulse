@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { handleSaveQuestionAnswer } from "../actions/questions";
+import { handleSaveQuestionAnswer } from "../actions/shared.js";
 import { formatDate } from "../utils/helpers";
 import Nav from "./Nav";
+import "./styles/QuestionDetail.css";
 
 function QuestionDetail({ questions, authedUser, users }) {
   const dispatch = useDispatch();
@@ -16,8 +17,6 @@ function QuestionDetail({ questions, authedUser, users }) {
     optionOne: "",
     optionTwo: "",
   });
-
-  console.log(question.optionOne.votes.includes(authedUser));
 
   const optionOneStats = () => {
     return (
@@ -46,63 +45,75 @@ function QuestionDetail({ questions, authedUser, users }) {
     dispatch(handleSaveQuestionAnswer(selectedOption));
   };
 
-  const disabled =
-    selectOption.optionOne === "" || selectOption.optionTwo === "";
   return (
     <div>
       <div>
         <Nav />
       </div>
       <div className='container'>
-        <div>
-          <img src={author.avatarURL} alt={author.name} />
+        <div className='question-info'>
+          <img
+            src={author.avatarURL}
+            alt={author.name}
+            className='author-img'
+          />
           <h4>{author.name}</h4>
           <h5>Asked at: {formatDate(timestamp)}</h5>
         </div>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
-            <label>Would you rather:</label>
+            <h2>Would you rather:</h2>
             <div className='form-check'>
               <input
                 type='radio'
                 name='option'
                 value='optionOne'
+                className='form-check-input'
                 checked={selectOption.optionOne === "selected"}
                 onChange={(e) => setSelectOption({ optionOne: "selected" })}
               />
               <label>{question.optionOne.text}</label>
             </div>
-            <div>
+            <div className='form-check'>
               <input
                 type='radio'
                 name='option'
                 value='optionTwo'
+                className='form-check-input'
                 checked={selectOption.optionTwo === "selected"}
                 onChange={(e) => setSelectOption({ optionTwo: "selected" })}
               />
               <label>{question.optionTwo.text}</label>
             </div>
-            <button className='btn' type='submit' disabled={disabled}>
+            <button
+              className='btn'
+              type='submit'
+              disabled={
+                selectOption.optionOne === "" || selectOption.optionTwo === ""
+              }
+            >
               Submit
             </button>
-            {selectOption.optionOne === "selected" && (
-              <div>
-                <h5>
-                  {optionOneStats()}% of employees selected to{" "}
-                  {question.optionOne.text}
-                </h5>
-              </div>
-            )}
-            {selectOption.optionTwo === "selected" && (
-              <div>
-                <h5>
-                  {optionTwoStats()}% of employees selected to{" "}
-                  {question.optionTwo.text}
-                </h5>
-              </div>
-            )}
           </div>
         </form>
+        <div className='card'>
+          {question.optionOne.votes.includes(authedUser) && (
+            <div>
+              <h5>
+                {optionOneStats()}% of employees selected to{" "}
+                {question.optionOne.text}
+              </h5>
+            </div>
+          )}
+          {question.optionTwo.votes.includes(authedUser) && (
+            <div>
+              <h5>
+                {optionTwoStats()}% of employees selected to{" "}
+                {question.optionTwo.text}
+              </h5>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

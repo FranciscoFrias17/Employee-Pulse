@@ -4,6 +4,7 @@ import { handleAddQuestion } from "../actions/questions";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Nav from "./Nav";
+import "./styles/NewQuestion.css";
 
 const NewQuestion = () => {
   const navigate = useNavigate();
@@ -45,38 +46,40 @@ const NewQuestion = () => {
       <div>
         <Nav />
       </div>
-      <h2>Add New Question</h2>
-      <form onSubmit={handleSubmit}>
-        <div className='form-group'>
-          <label>Would you Rather:</label>
-          <input
-            type='text'
-            name='optionOneText'
-            value={question.optionOneText}
-            onChange={handleChange}
-            className='form-control'
-            placeholder='Option One'
-          />
-          <label>or</label>
-          <input
-            type='text'
-            name='optionTwoText'
-            value={question.optionTwoText}
-            onChange={handleChange}
-            className='form-control'
-            placeholder='Option Two'
-          />
-          <button
-            className='btn'
-            type='submit'
-            disabled={
-              question.optionOneText === "" || question.optionTwoText === ""
-            }
-          >
-            Submit Question
-          </button>
-        </div>
-      </form>
+      <div className='container'>
+        <h2 className='title-header'>Create New Question</h2>
+        <form onSubmit={handleSubmit}>
+          <div className='form-group'>
+            <label>Would you Rather:</label>
+            <input
+              type='text'
+              name='optionOneText'
+              value={question.optionOneText}
+              onChange={handleChange}
+              className='form-control'
+              placeholder='Option One'
+            />
+            <label>or</label>
+            <input
+              type='text'
+              name='optionTwoText'
+              value={question.optionTwoText}
+              onChange={handleChange}
+              className='form-control'
+              placeholder='Option Two'
+            />
+            <button
+              className='btn'
+              type='submit'
+              disabled={
+                question.optionOneText === "" || question.optionTwoText === ""
+              }
+            >
+              Submit Question
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

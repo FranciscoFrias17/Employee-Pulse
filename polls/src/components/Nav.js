@@ -1,24 +1,25 @@
 import { Link } from "react-router-dom";
 import User from "./User";
+import "./styles/Nav.css";
 
 function Nav() {
   return (
-    <div>
-      <ul>
-        <li>
+    <nav className='NavBar'>
+      <ul className='nav-Ul'>
+        <li className='nav-li'>
           <Link to='/'>Home</Link>
         </li>
-        <li>
+        <li className='nav-li'>
           <Link to='/add'>Add Question</Link>
         </li>
-        <li>
+        <li className='nav-li'>
           <Link to='/leaderboard'>Leaderboard</Link>
         </li>
-        <div>
-          <User />
-        </div>
       </ul>
-    </div>
+      <div>
+        <User />
+      </div>
+    </nav>
   );
 }
 

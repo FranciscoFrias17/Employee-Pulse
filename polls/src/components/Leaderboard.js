@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Nav from "./Nav";
+import "./styles/Leaderboard.css";
 
 function Leaderboard({ users, authedUser }) {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -26,22 +27,32 @@ function Leaderboard({ users, authedUser }) {
       <div>
         <Nav />
       </div>
-      <h2>Leaderboard</h2>
-      <ul className='Leaderboard'>
-        {leaderboard.map((user) => {
-          return (
-            <li key={user.name}>
-              <img src={user.avatarURL} alt={user.name} />
-              <div>
-                <h3>{user.name}</h3>
-                <p>Answers: {user.answers}</p>
-                <p>Questions: {user.questions}</p>
-                <p>Total: {user.total}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <div className='leaderboard-container'>
+        <div className='leaderboard-header'>
+          <h2>Leaderboard</h2>
+        </div>
+        <div className='leaderboard-body'>
+          <ul className='Leaderboard-ul'>
+            {leaderboard.map((user) => {
+              return (
+                <li key={user.name} className='leaderboard-li'>
+                  <img
+                    src={user.avatarURL}
+                    alt={user.name}
+                    className='avatar'
+                  />
+                  <div className='user-data'>
+                    <p className='user'>{user.name}</p>
+                    <p>Questions answered: {user.answers}</p>
+                    <p>Questions created: {user.questions}</p>
+                    <p>Total: {user.total}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

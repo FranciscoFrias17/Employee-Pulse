@@ -1,31 +1,34 @@
 import Question from "./Question";
+import "./styles/QuestionContainer.css";
 
 function QuestionContainer({ newQuestions, completedQuestions }) {
   return (
     <div>
-      <div>
-        <h3>New Polls:</h3>
-        <ul>
-          {newQuestions.map((question) => {
-            return (
-              <li key={question.id}>
-                <Question id={question.id} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div>
-        <h3>Completed Polls:</h3>
-        <ul>
-          {completedQuestions.map((question) => {
-            return (
-              <li key={question.id}>
-                <Question id={question.id} />
-              </li>
-            );
-          })}
-        </ul>
+      <div className='container'>
+        <div>
+          <h3>New Questions</h3>
+          <ul className='container-ul'>
+            {newQuestions.map((question) => {
+              return (
+                <li key={question.id} className='question-card'>
+                  <Question id={question.id} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div>
+          <h3>Completed Questions</h3>
+          <ul className='container-ul'>
+            {completedQuestions.map((question) => {
+              return (
+                <li key={question.id} className='question-card'>
+                  <Question id={question.id} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );

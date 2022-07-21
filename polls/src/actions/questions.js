@@ -1,4 +1,4 @@
-import { saveQuestion, saveQuestionAnswer } from "../utils/api";
+import { saveQuestion } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -35,17 +35,5 @@ export function savePollAnswer({ authedUser, qid, answer }) {
     authedUser,
     qid,
     answer,
-  };
-}
-
-export function handleSaveQuestionAnswer(info) {
-  return async (dispatch) => {
-    dispatch(savePollAnswer(info));
-
-    return await saveQuestionAnswer(info).catch((e) => {
-      console.warn("Error in handleSaveQuestionAnswer: ", e);
-      dispatch(savePollAnswer(info));
-      alert("Error: Could not save poll answer.");
-    });
   };
 }

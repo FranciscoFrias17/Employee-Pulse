@@ -1,0 +1,28 @@
+.question-container {
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 40px;
+  margin: 10px;
+  margin-left: 20px;
+}
+
+.author {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.question-info {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
+import "./styles/User.css";
 
 const UserProfile = (props) => {
   const navigate = useNavigate();
@@ -12,14 +13,24 @@ const UserProfile = (props) => {
   };
 
   return (
-    <div className='user-profile'>
-      <img src={avatarURL} alt={`Avatar of ${name}`} className='avatar' />
-      <div className='user-info'>
-        <div>
-          <span>{name}</span>
-        </div>
-        <div>
-          <button onClick={handleLogout}>Logout</button>
+    <div className='container'>
+      <div className='user-profile'>
+        <img
+          src={avatarURL}
+          alt={`Avatar of ${name}`}
+          className='user-avatar'
+        />
+        <div className='user-card'>
+          <div className='user-info'>
+            <div className='user-name-container'>
+              <span className='user-name'>{name}</span>
+            </div>
+            <div>
+              <button className='Logout-btn' onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

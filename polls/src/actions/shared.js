@@ -1,6 +1,6 @@
-import { getInitialData } from "../utils/api";
-import { receiveQuestions } from "./questions";
-import { receiveUsers } from "./users";
+import { getInitialData, saveQuestionAnswer } from "../utils/api";
+import { receiveQuestions, savePollAnswer } from "./questions";
+import { receiveUsers, addAnswerToUser } from "./users";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export function handleInitialData() {
@@ -11,6 +11,20 @@ export function handleInitialData() {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
       dispatch(hideLoading());
+    });
+  };
+}
+
+export function handleSaveQuestionAnswer(info) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    dispatch(addAnswerToUser(info));
+    dispatch(savePollAnswer(info));
+
+    return await saveQuestionAnswer(info).catch((e) => {
+      dispatch(savePollAnswer(info));
+      dispatch(addAnswerToUser(info));
+      console.warn("Error in handleSaveQuestionAnswer: ", e);
     });
   };
 }

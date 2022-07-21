@@ -1,0 +1,59 @@
+.container {
+  width: 100%;
+  max-width: 590px;
+  padding: 10px;
+  display: flex;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.author-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 40px;
+  margin: 10px;
+}
+
+.question-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.form-check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin: 5px;
+}
+
+.form-group {
+  background-color: rgb(202, 202, 202);
+  border-color: black;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.form-check-input {
+  margin-left: 15px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-color: black;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: rgb(255, 230, 180);
+}
