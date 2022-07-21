@@ -1,7 +1,9 @@
 .question-container {
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  padding: 2px;
+  margin: 1px;
+  width: 194px;
 }
 
 .avatar {

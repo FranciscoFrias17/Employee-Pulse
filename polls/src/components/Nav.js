@@ -4,8 +4,8 @@ import "./styles/Nav.css";
 
 function Nav() {
   return (
-    <nav className='NavBar'>
-      <ul className='nav-Ul'>
+    <nav className='navbar'>
+      <ul className='nav-ul'>
         <li className='nav-li'>
           <Link to='/'>Home</Link>
         </li>

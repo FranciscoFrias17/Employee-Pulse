@@ -1,4 +1,4 @@
-.NavBar {
+.navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -8,7 +8,7 @@
   border-bottom: 3px solid #000000;
 }
 
-.nav-Ul {
+.nav-ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

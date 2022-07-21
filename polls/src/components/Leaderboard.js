@@ -32,25 +32,29 @@ function Leaderboard({ users, authedUser }) {
           <h2>Leaderboard</h2>
         </div>
         <div className='leaderboard-body'>
-          <ul className='Leaderboard-ul'>
+          <table className='Leaderboard-table'>
+            <tr>
+              <th>Users</th>
+              <th>Answered</th>
+              <th>Created</th>
+            </tr>
             {leaderboard.map((user) => {
               return (
-                <li key={user.name} className='leaderboard-li'>
-                  <img
-                    src={user.avatarURL}
-                    alt={user.name}
-                    className='avatar'
-                  />
-                  <div className='user-data'>
-                    <p className='user'>{user.name}</p>
-                    <p>Questions answered: {user.answers}</p>
-                    <p>Questions created: {user.questions}</p>
-                    <p>Total: {user.total}</p>
-                  </div>
-                </li>
+                <tr key={user.name}>
+                  <td className='user-data'>
+                    <img
+                      src={user.avatarURL}
+                      alt={user.name}
+                      className='avatar'
+                    />
+                    {user.name}
+                  </td>
+                  <td>{user.answers}</td>
+                  <td>{user.questions}</td>
+                </tr>
               );
             })}
-          </ul>
+          </table>
         </div>
       </div>
     </div>

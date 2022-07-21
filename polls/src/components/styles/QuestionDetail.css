@@ -57,3 +57,7 @@
   margin: 10px;
   background-color: rgb(255, 230, 180);
 }
+
+.votes {
+  text-align: center;
+}

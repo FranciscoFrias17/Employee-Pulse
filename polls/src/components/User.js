@@ -15,18 +15,20 @@ const UserProfile = (props) => {
   return (
     <div className='container'>
       <div className='user-profile'>
-        <img
-          src={avatarURL}
-          alt={`Avatar of ${name}`}
-          className='user-avatar'
-        />
+        <div className='user-profile-avatar'>
+          <img
+            src={avatarURL}
+            alt={`Avatar of ${name}`}
+            className='user-avatar'
+          />
+        </div>
         <div className='user-card'>
           <div className='user-info'>
             <div className='user-name-container'>
               <span className='user-name'>{name}</span>
             </div>
-            <div>
-              <button className='Logout-btn' onClick={handleLogout}>
+            <div className='btn-container'>
+              <button className='logout-btn' onClick={handleLogout}>
                 Logout
               </button>
             </div>

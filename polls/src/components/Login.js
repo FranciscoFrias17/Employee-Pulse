@@ -15,12 +15,13 @@ const Login = ({ users, dispatch }) => {
 
   return (
     <div className='login-container'>
-      <form className='Login-Form'>
-        <h2 className='Login_title'>Employee Polls</h2>
+      <form className='login-form'>
+        <h2 className='login_title'>Employee Polls</h2>
+        <h4>Please select a user:</h4>
         <div className='user-container'>
           {users.map((user) => {
             return (
-              <div className='User-Card' key={user.id}>
+              <div className='login-card' key={user.id}>
                 <img
                   src={user.avatarURL}
                   alt={user.name}

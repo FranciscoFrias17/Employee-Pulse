@@ -3,11 +3,13 @@ import { connect, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { handleSaveQuestionAnswer } from "../actions/shared.js";
 import { formatDate } from "../utils/helpers";
+import { useNavigate } from "react-router-dom";
 import Nav from "./Nav";
 import "./styles/QuestionDetail.css";
 
 function QuestionDetail({ questions, authedUser, users }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { question_id } = useParams();
   let question = questions.find((question) => question.id === question_id);
   let author = users[question.author];
@@ -43,6 +45,9 @@ function QuestionDetail({ questions, authedUser, users }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(handleSaveQuestionAnswer(selectedOption));
+    setTimeout(() => {
+      navigate("/");
+    }, 3500);
   };
 
   return (
@@ -103,6 +108,9 @@ function QuestionDetail({ questions, authedUser, users }) {
                 {optionOneStats()}% of employees selected to{" "}
                 {question.optionOne.text}
               </h5>
+              <h5 className='votes'>
+                {question.optionOne.votes.length} users voted for this answer
+              </h5>
             </div>
           )}
           {question.optionTwo.votes.includes(authedUser) && (
@@ -110,6 +118,9 @@ function QuestionDetail({ questions, authedUser, users }) {
               <h5>
                 {optionTwoStats()}% of employees selected to{" "}
                 {question.optionTwo.text}
+              </h5>
+              <h5 className='votes'>
+                {question.optionTwo.votes.length} users voted for this answer
               </h5>
             </div>
           )}

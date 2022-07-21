@@ -48,12 +48,13 @@ const NewQuestion = () => {
       </div>
       <div className='container'>
         <h2 className='title-header'>Create New Question</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid='new-question-form'>
           <div className='form-group'>
             <label>Would you Rather:</label>
             <input
               type='text'
               name='optionOneText'
+              data-testid='optionOneText'
               value={question.optionOneText}
               onChange={handleChange}
               className='form-control'
@@ -63,6 +64,7 @@ const NewQuestion = () => {
             <input
               type='text'
               name='optionTwoText'
+              data-testid='optionTwoText'
               value={question.optionTwoText}
               onChange={handleChange}
               className='form-control'
@@ -71,6 +73,7 @@ const NewQuestion = () => {
             <button
               className='btn'
               type='submit'
+              data-testid='submit-button'
               disabled={
                 question.optionOneText === "" || question.optionTwoText === ""
               }
