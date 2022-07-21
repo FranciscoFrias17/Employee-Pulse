@@ -7,6 +7,10 @@ To initialize the project, change directory to `polls` and run `npm install`, th
 
 The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
+## Sources
+
+https://www.robinwieruch.de/react-connected-component-test/ # Connected Component Test
+
 ## Data
 
 There are two types of objects stored in our database:

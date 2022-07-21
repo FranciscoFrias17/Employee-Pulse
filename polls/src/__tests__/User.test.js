@@ -6,9 +6,12 @@ import configureStore from "redux-mock-store";
 import "@testing-library/jest-dom";
 import User from "../components/User";
 
+// Got the mock store idea from:
+//https://www.robinwieruch.de/react-connected-component-test/
+
 const mockStore = configureStore([]);
 
-describe("Leaderboard", () => {
+describe("User", () => {
   let mockedStore;
 
   beforeEach(() => {
