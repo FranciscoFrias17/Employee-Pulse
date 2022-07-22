@@ -1,7 +1,7 @@
 import Question from "./Question";
 import "./styles/QuestionContainer.css";
 
-function QuestionContainer({ newQuestions, completedQuestions }) {
+function NewQuestionContainer({ newQuestions }) {
   return (
     <div>
       <div className='container'>
@@ -17,21 +17,9 @@ function QuestionContainer({ newQuestions, completedQuestions }) {
             })}
           </ul>
         </div>
-        <div>
-          <h3>Completed Questions</h3>
-          <ul className='container-ul'>
-            {completedQuestions.map((question) => {
-              return (
-                <li key={question.id} className='question-card'>
-                  <Question id={question.id} />
-                </li>
-              );
-            })}
-          </ul>
-        </div>
       </div>
     </div>
   );
 }
 
-export default QuestionContainer;
+export default NewQuestionContainer;

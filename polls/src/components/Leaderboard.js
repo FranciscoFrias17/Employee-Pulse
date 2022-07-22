@@ -22,6 +22,8 @@ function Leaderboard({ users, authedUser }) {
     );
   }, [users, authedUser]);
 
+  console.log(users);
+
   return (
     <div>
       <div>
@@ -33,27 +35,31 @@ function Leaderboard({ users, authedUser }) {
         </div>
         <div className='leaderboard-body'>
           <table className='Leaderboard-table'>
-            <tr>
-              <th>Users</th>
-              <th>Answered</th>
-              <th>Created</th>
-            </tr>
-            {leaderboard.map((user) => {
-              return (
-                <tr key={user.name}>
-                  <td className='user-data'>
-                    <img
-                      src={user.avatarURL}
-                      alt={user.name}
-                      className='avatar'
-                    />
-                    {user.name}
-                  </td>
-                  <td>{user.answers}</td>
-                  <td>{user.questions}</td>
-                </tr>
-              );
-            })}
+            <thead>
+              <tr>
+                <th>Users</th>
+                <th>Answered</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              {leaderboard.map((user) => {
+                return (
+                  <tr key={user.name}>
+                    <td className='user-data'>
+                      <img
+                        src={user.avatarURL}
+                        alt={user.name}
+                        className='avatar'
+                      />
+                      {user.name}
+                    </td>
+                    <td>{user.answers}</td>
+                    <td>{user.questions}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
       </div>

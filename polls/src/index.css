@@ -10,28 +10,6 @@ a {
   color: #252525;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  text-decoration: none;
-}
-
-li {
-  list-style-type: none;
-  padding: 10px;
-  text-decoration: none;
-}
-
 label {
   display: block;
   padding: 10px;
@@ -47,5 +25,35 @@ label {
   background: #fff;
   font-size: 16px;
   width: 250px;
+  position: relative;
+}
+
+.dashboard-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.29);
+  cursor: pointer;
+  background: #fff;
+  font-size: 16px;
+  width: 250px;
+  position: relative;
+}
+
+.toggle-btn-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  cursor: pointer;
+  background: #fff;
+  font-size: 16px;
   position: relative;
 }

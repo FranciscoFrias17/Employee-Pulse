@@ -5,7 +5,7 @@ import Login from "./Login.js";
 import Dashboard from "./Dashboard.js";
 import NewQuestion from "./NewQuestion.js";
 import Leaderboard from "./Leaderboard.js";
-import QuestionDetail from "./QuestionDetail.js";
+import QuestionPage from "./QuestionPage.js";
 import Error from "./Error.js";
 import { Route, Routes } from "react-router-dom";
 
@@ -27,7 +27,7 @@ function App(props) {
               <Route path='/leaderboard' element={<Leaderboard />} />
               <Route
                 path='/questions/:question_id'
-                element={<QuestionDetail />}
+                element={<QuestionPage />}
               />
               <Route path='*' element={<Error />} />
             </Routes>

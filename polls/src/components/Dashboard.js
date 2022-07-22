@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-import QuestionContainer from "./QuestionContainer";
+import NewQuestionContainer from "./NewQuestionContainer";
+import CompletedQuestionContainer from "./CompletedQuestionContainer";
 import Nav from "./Nav";
 
 const Dashboard = ({ authedUser, questions }) => {
@@ -29,17 +30,38 @@ const Dashboard = ({ authedUser, questions }) => {
     );
   }, [authedUser, questions]);
 
+  const [activeTab, setActiveTab] = useState("");
+  const selectedTab = () => {
+    switch (activeTab) {
+      case "new":
+        return <NewQuestionContainer newQuestions={newQuestions} />;
+      case "completed":
+        return (
+          <CompletedQuestionContainer completedQuestions={completedQuestions} />
+        );
+      default:
+        return <NewQuestionContainer newQuestions={newQuestions} />;
+    }
+  };
   return (
     <div>
       <div>
         <Nav />
       </div>
-      <div>
-        <QuestionContainer
-          newQuestions={newQuestions}
-          completedQuestions={completedQuestions}
-        />
+      <div className='toggle-btn-container'>
+        <div className='btn-container'>
+          <button onClick={() => setActiveTab("new")} className='dashboard-btn'>
+            New Questions
+          </button>
+          <button
+            onClick={() => setActiveTab("completed")}
+            className='dashboard-btn'
+          >
+            Completed Questions
+          </button>
+        </div>
       </div>
+      {selectedTab()}
     </div>
   );
 };
