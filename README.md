@@ -1,7 +1,7 @@
-# Employee Polls Project
+# Employee Pulse
 
 This project has been bootstraped with Create React App. It is a simple employee poll application.
-Most of the data is managed by Redux.
+Most of the data is managed by Redux. Users can log in as one of the created users and either create new questions or answer questions from other users. Upon answering a question the user can see the percentage of other employees who had the same answer. The users are also ranked in a leaderboard by the amount of questions they have answered.  
 
 To initialize the project, change directory to `polls` and run `npm install`, then `npm start`.
 
