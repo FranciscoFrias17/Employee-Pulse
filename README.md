@@ -1,11 +1,11 @@
 # Employee Pulse
 
 This project has been bootstraped with Create React App. It is a simple employee poll application.
-Most of the data is managed by Redux. Users can log in as one of the created users and either create new questions or answer questions from other users. Upon answering a question the user can see the percentage of other employees who had the same answer. The users are also ranked in a leaderboard by the amount of questions they have answered.  
+Most of the data is managed by Redux. Users can log in as one of the created users and either create new questions or answer questions from other users. Upon answering a question the user can see the percentage of other employees who had the same answer. The users are also ranked in a leaderboard by the amount of questions they have answered. Testing is done using the Jest Library
 
 To initialize the project, change directory to `polls` and run `npm install`, then `npm start`.
 
-The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
+The `_DATA.js` file represents a fake database and methods that let you access the data. 
 
 ## Sources
 
